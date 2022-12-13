@@ -27,3 +27,10 @@ CREATE TABLE graduates (
 16.SELECT companies.Name FROM employees 
  INNER JOIN companies ON companies.Name = employees.Company
  WHERE employees.Role = 'Graphic Designer'
+
+
+18.SELECT * from students where Points = (SELECT max(Points) from students)
+19.SELECT avg(Points) FROM students
+20.SELECT count(Name) FROM students WHERE Points = 500
+21.SELECT Name FROM students WHERE Name like '%s%'
+22.SELECT * FROM students ORDER BY Points DESC
