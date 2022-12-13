@@ -85,7 +85,7 @@ Now, open the database **carDealership**. You will find 2 tables:
  
 In the **Execute SQL** tab, do the following:
 
-14. Produce a table that contains, for each employee, his/her name, company name, and company date.
+14. Produce a table that contains, for each employee, his/her name, company name, and company date.got
 15. Find the name of **employees** that work in companies made before 2000.
 16. Find the name of company that has a graphic designer.
 17. Commit ("Joins") 🔑🔑🔑🔑🔑
