@@ -16,13 +16,6 @@ app.get('/test', (req, res) => {
   res.json({ status: 200, message: 'ok' });
 });
 
-/* app.get('/test1', (req, res) => {
-  res.json({ status: 200, message: 'okk' });
-}); 
-app.get('/bye', (req, res) =>{
-  res.status(404).json({ status: 404, message: '404 hmmm' });
-});*/
-
 app.get('/time', (req, res) => {
   const currentTime = new Date();
   const hours = currentTime.getHours();
@@ -76,25 +69,29 @@ app.get('/movies/create/:id', (req, res) => {
     res.send(`Movie ${movieId} deleted!`);
   });
 
-
-// for invalid routes
-app.get('*', (req, res) => {
-  res.send('404! This is an invalid URL.');
-});
-
-//test
-// note: if i write the code from step 3 here it doesn't work, whyyyyy!!!?
-/* app.get('/test', (req, res) => {
-  res.json({ status: 200, message: 'ok' });
-});*/
-
-//note: vice versa too!!!!
-/*app.get('/test1', (req, res) => {
-  res.json({ status: 200, message: 'okk' });
-});
-
-app.get('/bye', (req, res) =>{
-  res.json({ status: 404, message: '404 hmmm' });
-});*/
-
 // step 6:
+app.get('/movies/read/by-date', (req, res) => {
+  const moviesSortedByDate = movies.sort((a, b) => b.year - a.year);
+  res.status(200).json({ status: 200, data: moviesSortedByDate });
+});
+
+app.get('/movies/read/by-rating', (req, res) => {
+  const moviesSortedByRating = movies.sort((a, b) => b.rating - a.rating);
+  res.status(200).json({ status: 200, data: moviesSortedByRating });
+});
+
+//! i need to understand this part more later. what is -1 1 0...
+app.get('/movies/read/by-title', (req, res) => {
+  const moviesSortedByTitle = movies.sort((a, b) => {
+    if (a.title < b.title) {
+      return -1;
+    }
+    if (a.title > b.title) {
+      return 1;
+    }
+    return 0;
+  });
+  res.status(200).json({ status: 200, data: moviesSortedByTitle });
+});
+
+
