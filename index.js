@@ -80,7 +80,7 @@ app.get('/movies/read/by-rating', (req, res) => {
   res.status(200).json({ status: 200, data: moviesSortedByRating });
 });
 
-//! i need to understand this part more later. what is -1 1 0...
+
 app.get('/movies/read/by-title', (req, res) => {
   const moviesSortedByTitle = movies.sort((a, b) => {
     if (a.title < b.title) {
@@ -94,4 +94,16 @@ app.get('/movies/read/by-title', (req, res) => {
   res.status(200).json({ status: 200, data: moviesSortedByTitle });
 });
 
+//* step 7:
+app.get('/movies/read/id/:id', (req, res) => {
+  const id = req.params.id;
+  const movie = movies.find(movie => movie.id === id.title);
+  if (movie) {
+    res.json({ status: 200, data: movie });
+  } else {
+    res.status(404).json({ status: 404, error: true, message: `the movie ${id} does not exist` });
+  }
+});
+
+// step 8:
 
