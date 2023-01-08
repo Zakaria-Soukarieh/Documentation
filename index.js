@@ -3,6 +3,8 @@ const express = require('express');
 
 const app = express();
 
+const MongoClient = require('mongodb').MongoClient;
+
 app.get('/', (req, res) => {
   res.send('ok');
 });
@@ -19,7 +21,7 @@ app.get('/test', (req, res) => {
 app.get('/aaa', (req, res) => {
   console.log('hi there');
   res.json(movies);});
-  
+
 app.get('/time', (req, res) => {
   const currentTime = new Date();
   const hours = currentTime.getHours();
@@ -190,4 +192,3 @@ app.get('/movies/add', (req, res) => {
   });
 });
 
-// step 9:
