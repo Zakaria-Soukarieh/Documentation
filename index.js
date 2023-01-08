@@ -57,10 +57,22 @@ app.get('/movies/create/:id', (req, res) => {
     res.json({ status: 200, data: movies});
   });
   
+  // step 10 !!
   // Update a movie
   app.get('/movies/update/:id', (req, res) => {
     const movieId = req.params.id;
-    res.send(`Movie ${movieId} updated!`);
+    const newYear = req.query.year;
+    const newTitle = req.query.title;
+    const newRating = req.query.rating;
+    const movieIndex = movies.findIndex(movie => movie.title === movieId); 
+
+    const movie = movies[movieIndex];
+    if (newTitle) movie.title = newTitle;
+    if (newYear) movie.year = newYear;
+    if (newRating) movie.rating = newRating;
+    res.json({ status: 200, data: movie });
+
+
   });
   
 
