@@ -16,6 +16,10 @@ app.get('/test', (req, res) => {
   res.json({ status: 200, message: 'ok' });
 });
 
+app.get('/aaa', (req, res) => {
+  console.log('hi there');
+  res.json(movies);});
+  
 app.get('/time', (req, res) => {
   const currentTime = new Date();
   const hours = currentTime.getHours();
@@ -47,19 +51,19 @@ const movies = [
 ];
 
 // Create a movie
-app.get('/movies/create/:id', (req, res) => {
+app.get('/movies/post/:id', (req, res) => {
   const movieId = req.params.id;
     res.send(`Movie ${movieId} created!`);
   });
 
-  // Read a movie
-  app.get('/movies/read/', (req, res) => {
+  // get a movie
+  app.get('/movies/get/', (req, res) => {
     res.json({ status: 200, data: movies});
   });
   
   // step 10 !!
   // Update a movie
-  app.get('/movies/update/:id', (req, res) => {
+  app.get('/movies/put/:id', (req, res) => {
     const movieId = req.params.id;
     const newYear = req.query.year;
     const newTitle = req.query.title;
@@ -104,18 +108,18 @@ app.get('/movies/create/:id', (req, res) => {
 
 
 // step 6:
-app.get('/movies/read/by-date', (req, res) => {
+app.get('/movies/get/by-date', (req, res) => {
   const moviesSortedByDate = movies.sort((a, b) => b.year - a.year);
   res.status(200).json({ status: 200, data: moviesSortedByDate });
 });
 
-app.get('/movies/read/by-rating', (req, res) => {
+app.get('/movies/get/by-rating', (req, res) => {
   const moviesSortedByRating = movies.sort((a, b) => b.rating - a.rating);
   res.status(200).json({ status: 200, data: moviesSortedByRating });
 });
 
 
-app.get('/movies/read/by-title', (req, res) => {
+app.get('/movies/get/by-title', (req, res) => {
   const moviesSortedByTitle = movies.sort((a, b) => {
     if (a.title < b.title) {
       return -1;
@@ -129,7 +133,7 @@ app.get('/movies/read/by-title', (req, res) => {
 });
 
 //* step 7:
-app.get('/movies/read/id/:id', (req, res) => {
+app.get('/movies/get/id/:id', (req, res) => {
   const id = req.params.id;
   const movie = movies.find(movie => movie.title === id);
   if (movie) {
