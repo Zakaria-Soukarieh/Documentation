@@ -63,11 +63,33 @@ app.get('/movies/create/:id', (req, res) => {
     res.send(`Movie ${movieId} updated!`);
   });
   
+
+
+
+  // step 9 !!!
   // Delete a movie
   app.get('/movies/delete/:id', (req, res) => {
-    const movieId = req.params.id;
-    res.send(`Movie ${movieId} deleted!`);
-  });
+    const id = req.params.id;
+    const movie = movies.findIndex(movie => movie.title === id); 
+    console.log(movie);
+    console.log(id);
+      if (movie === -1){
+        res.status(404).json({ status: 404, error: true, message:'movie not found' });
+      }
+      else if (movie) {
+        movies.splice(movie, 1);
+        res.json(movies)
+      }
+      //! if indez is 0 it doesn't work, it will give -1
+      //? or is it a problem only with jaws????
+
+  
+});
+
+
+
+
+
 
 // step 6:
 app.get('/movies/read/by-date', (req, res) => {
@@ -97,7 +119,7 @@ app.get('/movies/read/by-title', (req, res) => {
 //* step 7:
 app.get('/movies/read/id/:id', (req, res) => {
   const id = req.params.id;
-  const movie = movies.find(movie => movie.id === id);
+  const movie = movies.find(movie => movie.title === id);
   if (movie) {
     res.json({ status: 200, data: movie });
   } else {
